@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  work_management_backend:
+    build:
+      context: ./docker/workspace
+      args:
+        HOST_UID: ${HOST_UID}
+        HOST_GID: ${HOST_GID}
+    user: node
+    tty: true
+    volumes:
+      - .:/home/node/work-management-backend
+    ports:
+      - ${APP_PORT}:3000
+    working_dir: /home/node/work-management-backend
+    command: ./docker/workspace/start-server.sh

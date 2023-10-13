@@ -1,0 +1,6 @@
+#!/bin/sh
+
+(( ${+commands[docker-compose]} )) && dccmd='docker-compose' || dccmd='docker compose'
+TERMINAL="$dccmd exec -T work_management_backend"
+
+$TERMINAL yarn lint-staged
