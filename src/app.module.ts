@@ -7,6 +7,7 @@ import { UsersModule } from './users/users.module'
 import database from 'config/database'
 import { DataSourceOptions } from 'typeorm'
 import { TasksModule } from './tasks/tasks.module'
+import { StatusesModule } from './statuses/statuses.module'
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { TasksModule } from './tasks/tasks.module'
     }),
     UsersModule,
     TasksModule,
+    StatusesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

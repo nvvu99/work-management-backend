@@ -1,3 +1,4 @@
+import { Status } from '@/statuses/statuses.entity'
 import { User } from '@/users/users.entity'
 import {
   Column,
@@ -28,6 +29,10 @@ export class Task {
   @ManyToOne(() => User, (user) => user.tasks)
   @JoinColumn({ name: 'user_id' })
   user: User
+
+  @ManyToOne(() => Status, (status) => status.tasks)
+  @JoinColumn({ name: 'status_id' })
+  status: Status
 
   @CreateDateColumn({ name: 'created_date' })
   createdDate: Date
