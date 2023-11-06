@@ -6,6 +6,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import { UsersModule } from './users/users.module'
 import database from 'config/database'
 import { DataSourceOptions } from 'typeorm'
+import { TasksModule } from './tasks/tasks.module'
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { DataSourceOptions } from 'typeorm'
       useFactory: (configService: ConfigService) => configService.get<DataSourceOptions>('database'),
     }),
     UsersModule,
+    TasksModule,
   ],
   controllers: [AppController],
   providers: [AppService],
