@@ -1,17 +1,24 @@
-version: '3'
-
 services:
-  work_management_backend:
-    build:
-      context: ./docker/workspace
-      args:
-        HOST_UID: ${HOST_UID}
-        HOST_GID: ${HOST_GID}
-    user: node
+  api-server:
+    image: node:23-alpine3.20
     tty: true
     volumes:
-      - .:/home/node/work-management-backend
+      - .:/home/node/hybrid-working-support-backend
     ports:
       - ${APP_PORT}:3000
-    working_dir: /home/node/work-management-backend
+    working_dir: /home/node/hybrid-working-support-backend
     command: ./docker/workspace/start-server.sh
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:17.2-alpine3.20
+    ports:
+      - ${FORWARD_DB_PORT}:5432
+    volumes:
+      - ./docker/postgres/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - PGDATA=/var/lib/postgresql/data/pgdata
