@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  work_management_backend:
+  server:
     build:
       context: ./docker/workspace
       args:
@@ -15,3 +15,17 @@ services:
       - ${APP_PORT}:3000
     working_dir: /home/node/work-management-backend
     command: ./docker/workspace/start-server.sh
+    depends_on:
+      - mariadb
+
+  mariadb:
+    image: mariadb:10.8.3
+    ports:
+      - ${FORWARD_DB_PORT}:3306
+    volumes:
+      - ./docker/mariadb/data:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
