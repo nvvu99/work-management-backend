@@ -9,6 +9,7 @@ import { DataSourceOptions } from 'typeorm'
 import { TasksModule } from './tasks/tasks.module'
 import { StatusesModule } from './statuses/statuses.module'
 import { CategoriesModule } from './categories/categories.module'
+import { PrioritiesModule } from './priorities/priorities.module'
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { CategoriesModule } from './categories/categories.module'
     TasksModule,
     StatusesModule,
     CategoriesModule,
+    PrioritiesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

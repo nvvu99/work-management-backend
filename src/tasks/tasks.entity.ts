@@ -1,4 +1,5 @@
 import { Category } from '@/categories/categories.entity'
+import { Priority } from '@/priorities/priorities.entity'
 import { Status } from '@/statuses/statuses.entity'
 import { User } from '@/users/users.entity'
 import {
@@ -38,6 +39,10 @@ export class Task {
   @ManyToOne(() => Category, (category) => category.tasks)
   @JoinColumn({ name: 'category_id' })
   category: Category
+
+  @ManyToOne(() => Priority, (priority) => priority.tasks)
+  @JoinColumn({ name: 'priority_id' })
+  priority: Priority
 
   @CreateDateColumn({ name: 'created_date' })
   createdDate: Date
